@@ -5,6 +5,9 @@
 */
 
 import cloudinary from "@/configs/cloudinary.config";
+import envConfig from "@/configs/env.config";
+import { PutObjectCommand, s3Client } from "@/configs/s3.config";
+import { generateRandomString } from "@/utils";
 
 class UploadService {
   static async uploadImageUrl() {
@@ -71,6 +74,20 @@ class UploadService {
     }
 
     return uploadedImages;
+  }
+
+  static async uploadImageS3(file: Express.Multer.File) {
+    const randomImageName = generateRandomString();
+    const command = new PutObjectCommand({
+      Bucket: envConfig.aws.bucketName,
+      Key: randomImageName,
+      Body: file.buffer,
+      ContentType: "image/jpeg",
+    });
+
+    const result = await s3Client.send(command);
+
+    return result;
   }
 }
 

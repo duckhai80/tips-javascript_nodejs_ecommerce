@@ -40,6 +40,12 @@ const envConfig = {
     apiKey: process.env.CLOUDINARY_API_KEY || "",
     apiSecret: process.env.CLOUDINARY_API_SECRET || "",
   },
+  aws: {
+    region: process.env.AWS_REGION || "",
+    bucketName: process.env.AWS_BUCKET_NAME || "",
+    bucketAccessKey: process.env.AWS_BUCKET_ACCESS_KEY || "",
+    bucketSecretKey: process.env.AWS_BUCKET_SECRET_KEY || "",
+  },
 };
 
 export default envConfig;

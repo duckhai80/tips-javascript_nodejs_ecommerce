@@ -1,4 +1,4 @@
-import { uploadDisk } from "@/configs/multer.config";
+import { uploadDisk, uploadMemory } from "@/configs/multer.config";
 import { uploadController } from "@/controllers";
 import {
   catchAsync,
@@ -16,13 +16,19 @@ uploadRouter.use(checkAuthentication);
 uploadRouter.post("/image-url", catchAsync(uploadController.uploadImageUrl));
 uploadRouter.post(
   "/image",
-  uploadDisk.single("thumb"),
+  uploadDisk.single("file"),
   catchAsync(uploadController.uploadImage),
 );
 uploadRouter.post(
   "/images",
-  uploadDisk.array("thumbs", 3),
+  uploadDisk.array("files", 3),
   catchAsync(uploadController.uploadImages),
+);
+
+uploadRouter.post(
+  "/image-s3",
+  uploadMemory.single("file"),
+  catchAsync(uploadController.uploadImageS3),
 );
 
 export default uploadRouter;

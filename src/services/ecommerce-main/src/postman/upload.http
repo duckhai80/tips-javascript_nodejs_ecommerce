@@ -44,3 +44,17 @@ Content-Type: image/png
 
 < /Users/duckhai80/Desktop/Screenshot 2025-12-09 at 12.17.17.png
 ------FormBoundary--
+
+### Upload image s3 from local
+POST {{baseUrl}}/image-s3
+Content-Type: multipart/form-data; boundary=----FormBoundary
+Authorization: {{$dotenv AUTH_TOKEN}}
+x-api-key: {{$dotenv X_API_KEY}}
+x-client-id: {{$dotenv X_CLIENT_ID}}
+
+------FormBoundary
+Content-Disposition: form-data; name="file"; filename="Screenshot 2026-04-21 at 15.24.11.png"
+Content-Type: image/png
+
+< /Users/duckhai80/Desktop/Screenshot 2026-04-21 at 15.24.11.png
+------FormBoundary--

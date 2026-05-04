@@ -38,6 +38,18 @@ class UploadController {
       }),
     }).send(res);
   };
+
+  uploadImageS3 = async (req: Request, res: Response, next: NextFunction) => {
+    const { file } = req;
+
+    if (!file) throw new BadRequestError("File missing");
+
+    return new SuccessResponse({
+      message: "Image uploaded successfully",
+      status: 200,
+      metadata: await UploadService.uploadImageS3(file),
+    }).send(res);
+  };
 }
 
 export default new UploadController();
