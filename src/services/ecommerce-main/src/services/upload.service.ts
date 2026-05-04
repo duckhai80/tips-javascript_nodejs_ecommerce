@@ -6,8 +6,13 @@
 
 import cloudinary from "@/configs/cloudinary.config";
 import envConfig from "@/configs/env.config";
-import { PutObjectCommand, s3Client } from "@/configs/s3.config";
+import {
+  GetObjectCommand,
+  PutObjectCommand,
+  s3Client,
+} from "@/configs/s3.config";
 import { generateRandomString } from "@/utils";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 class UploadService {
   static async uploadImageUrl() {
@@ -86,8 +91,17 @@ class UploadService {
     });
 
     const result = await s3Client.send(command);
+    const commandSignedUrl = new GetObjectCommand({
+      Bucket: envConfig.aws.bucketName,
+      Key: randomImageName,
+    });
+    const url = await getSignedUrl(s3Client, commandSignedUrl, {
+      expiresIn: 3600,
+    });
 
-    return result;
+    console.log("🚀 ~ UploadService ~ uploadImageS3 ~ url:", url);
+
+    return url;
   }
 }
 

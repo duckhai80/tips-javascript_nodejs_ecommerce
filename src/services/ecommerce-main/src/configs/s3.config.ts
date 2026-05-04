@@ -1,4 +1,9 @@
-import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import {
+  DeleteObjectCommand,
+  GetObjectCommand,
+  PutObjectCommand,
+  S3Client,
+} from "@aws-sdk/client-s3";
 import envConfig from "./env.config";
 
 const s3Client = new S3Client({
@@ -9,4 +14,4 @@ const s3Client = new S3Client({
   },
 });
 
-export { s3Client, PutObjectCommand };
+export { DeleteObjectCommand, GetObjectCommand, PutObjectCommand, s3Client };
