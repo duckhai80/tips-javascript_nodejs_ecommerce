@@ -1,8 +1,0 @@
-src/services/ecommerce-main/node_modules
-src/services/ecommerce-main/certs
-src/services/ecommerce-main/.env
-
-src/services/ecommerce-notification/node_modules
-src/services/ecommerce-notification/.env
-
-

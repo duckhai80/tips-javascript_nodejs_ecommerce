@@ -45,6 +45,10 @@ const envConfig = {
     bucketName: process.env.AWS_BUCKET_NAME || "",
     bucketAccessKey: process.env.AWS_BUCKET_ACCESS_KEY || "",
     bucketSecretKey: process.env.AWS_BUCKET_SECRET_KEY || "",
+    cloudfrontDistributionDomain:
+      process.env.AWS_CLOUDFRONT_DISTRIBUTION_DOMAIN || "",
+    cloudfrontPrivateKey: process.env.AWS_CLOUDFRONT_PRIVATE_KEY || "",
+    cloudfrontKeyPairId: process.env.AWS_CLOUDFRONT_PUBLIC_KEY_ID || "",
   },
 };
 

@@ -20,11 +20,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const privateKey = fs.readFileSync(
-  path.join(__dirname, "../../certs/private.pem"),
+  path.join(__dirname, "../../certs/jwt/private.pem"),
   "utf8",
 );
 const publicKey = fs.readFileSync(
-  path.join(__dirname, "../../certs/public.pem"),
+  path.join(__dirname, "../../certs/jwt/public.pem"),
   "utf8",
 );
 

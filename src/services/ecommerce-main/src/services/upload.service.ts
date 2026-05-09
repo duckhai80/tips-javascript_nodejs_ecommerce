@@ -12,7 +12,8 @@ import {
   s3Client,
 } from "@/configs/s3.config";
 import { generateRandomString } from "@/utils";
-import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { getSignedUrl } from "@aws-sdk/cloudfront-signer";
+// import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 class UploadService {
   static async uploadImageUrl() {
@@ -91,17 +92,25 @@ class UploadService {
     });
 
     const result = await s3Client.send(command);
+    /* // Get S3 signed url
     const commandSignedUrl = new GetObjectCommand({
       Bucket: envConfig.aws.bucketName,
       Key: randomImageName,
     });
     const url = await getSignedUrl(s3Client, commandSignedUrl, {
-      expiresIn: 3600,
+      expiresIn: 36000,
+    }); */
+    const url = getSignedUrl({
+      url: `${envConfig.aws.cloudfrontDistributionDomain}/${randomImageName}`,
+      keyPairId: envConfig.aws.cloudfrontKeyPairId,
+      privateKey: envConfig.aws.cloudfrontPrivateKey,
+      dateLessThan: new Date(Date.now() + 1000 * 60 * 60 * 24 * 100),
     });
 
-    console.log("🚀 ~ UploadService ~ uploadImageS3 ~ url:", url);
-
-    return url;
+    return {
+      url,
+      result,
+    };
   }
 }
 
