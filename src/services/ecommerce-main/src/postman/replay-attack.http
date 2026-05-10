@@ -1,0 +1,4 @@
+@baseUrl=http://localhost:3056/v1/api/test-replay-attack
+
+### Verify replay attack
+GET {{baseUrl}}?club=chelsea&stime=1778414677365&nonce=73935887632556440000&keyToken=XXXyyy&v=v1&sign=b54fb1604063b50de023362d9fc3d9a4

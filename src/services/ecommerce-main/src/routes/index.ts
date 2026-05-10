@@ -1,3 +1,4 @@
+import replayAttackController from "@/controllers/replay-attack.controller";
 import { catchAsync, checkApiKey, pushLogDiscord } from "@/middlewares";
 import express from "express";
 import accessRouter from "./access";
@@ -11,6 +12,11 @@ import productRouter from "./product";
 import uploadRouter from "./upload";
 
 const router = express.Router();
+
+router.get(
+  "/v1/api/test-replay-attack",
+  catchAsync(replayAttackController.testReplayAttack),
+);
 
 // Check api key
 router.use(catchAsync(checkApiKey));

@@ -1,6 +1,7 @@
 import "@/configs/env.config";
 import router from "@/routes";
 import compression from "compression";
+import cors from "cors";
 import express, { NextFunction, Request, Response } from "express";
 import helmet from "helmet";
 import createHttpError from "http-errors";
@@ -12,6 +13,12 @@ import productServiceTest from "./tests/product-service.test";
 const app = express();
 
 // Init middleware
+app.use(
+  cors({
+    origin: "*",
+    optionsSuccessStatus: 200,
+  }),
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
